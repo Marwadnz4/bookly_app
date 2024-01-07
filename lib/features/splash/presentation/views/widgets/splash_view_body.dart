@@ -16,6 +16,10 @@ class _SplashViewBodyState extends State<SplashViewBody> with SingleTickerProvid
   @override
   void initState() {
     super.initState();
+    initSlidingAnimation();
+  }
+
+  void initSlidingAnimation() {
     animationController = AnimationController(
       vsync: this,
       duration: const Duration(minutes: 1),
@@ -24,6 +28,7 @@ class _SplashViewBodyState extends State<SplashViewBody> with SingleTickerProvid
       begin: const Offset(0, 20),
       end: Offset.zero,
     ).animate(animationController);
+    animationController.forward();
   }
 
   @override
