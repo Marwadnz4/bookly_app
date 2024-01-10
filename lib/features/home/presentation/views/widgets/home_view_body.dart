@@ -1,4 +1,5 @@
 import 'package:bookly_app/core/utils/assets.dart';
+import 'package:bookly_app/core/utils/constants.dart';
 import 'package:bookly_app/core/utils/styles.dart';
 import 'package:bookly_app/features/home/presentation/views/widgets/custom_app_bare.dart';
 import 'package:bookly_app/features/home/presentation/views/widgets/featured_list_view_item.dart';
@@ -23,7 +24,7 @@ class HomeViewBody extends StatelessWidget {
           ),
           const Text(
             'Best Seller',
-            style: Styles.titleMedium,
+            style: Styles.textStyle18,
           ),
         ],
       ),
@@ -41,18 +42,17 @@ class BestSellerListViewItem extends StatelessWidget {
       child: Row(
         children: [
           AspectRatio(
-              aspectRatio: 2.5 / 4,
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  image: const DecorationImage(
-                    image: AssetImage(Assets.logo),
-                    fit: BoxFit.fill,
-                  ),
+            aspectRatio: 2.5 / 4,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                image: const DecorationImage(
+                  image: AssetImage(Assets.logo),
+                  fit: BoxFit.fill,
                 ),
               ),
             ),
-          
+          ),
         ],
       ),
     );
