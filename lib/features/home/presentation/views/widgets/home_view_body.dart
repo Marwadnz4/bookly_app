@@ -26,6 +26,9 @@ class HomeViewBody extends StatelessWidget {
             'Best Seller',
             style: Styles.textStyle18,
           ),
+          const SizedBox(
+            height: 20,
+          ),
         ],
       ),
     );
@@ -52,6 +55,22 @@ class BestSellerListViewItem extends StatelessWidget {
                 ),
               ),
             ),
+          ),
+          const SizedBox(
+            width: 30,
+          ),
+          Column(
+            children: [
+              SizedBox(
+                width: MediaQuery.of(context).size.height * .5,
+                child: const Text(
+                  'Harry porrtt and tand golnb jkfqek;lfak;laf;klfakmaf;lafk;av;dk',
+                  style: Styles.textStyle20,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
           ),
         ],
       ),
