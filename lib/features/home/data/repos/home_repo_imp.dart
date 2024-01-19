@@ -30,14 +30,74 @@ class HomeRepoImpl implements HomeRepo {
   }
 
   @override
-  Future<Either<Failure, List<BookModel>>> fetchFeaturedBooks() async{
+  Future<Either<Failure, List<BookModel>>> fetchFeaturedBooks() async {
     try {
-      var data = await apiService.get(endPoint: 'volumes?Filtering=free-ebooks&q=subject:Programming');
+      var data = await apiService.get(
+        endPoint: 'volumes?Filtering=free-ebooks&q=subject:computer science',
+      );
 
       List<BookModel> books = [];
 
       for (var item in data['items']) {
-        books.add(BookModel.fromJson(item));
+        try {
+          books.add(BookModel.fromJson(item));
+        } catch (e) {
+          print(item);
+        }
+      }
+      return right(books);
+    } on Exception catch (errMessage) {
+      if (errMessage is DioException) {
+        return left(ServerFailure.fromDioError(errMessage));
+      }
+      return left(ServerFailure(errMessage.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<BookModel>>> fetchSimilarBooks({
+    required String category,
+  }) async {
+    try {
+      var data = await apiService.get(
+        endPoint: 'volumes?Filtering=free-ebooks&Sorting=relevance&q=$category',
+      );
+
+      List<BookModel> books = [];
+
+      for (var item in data['items']) {
+        try {
+          books.add(BookModel.fromJson(item));
+        } catch (e) {
+          print(item);
+        }
+      }
+      return right(books);
+    } on Exception catch (errMessage) {
+      if (errMessage is DioException) {
+        return left(ServerFailure.fromDioError(errMessage));
+      }
+      return left(ServerFailure(errMessage.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<BookModel>>> fetchSearchBooks({
+    required String keyword,
+  }) async {
+    try {
+      var data = await apiService.get(
+        endPoint: 'volumes?Filtering=free-ebooks&Sorting=relevance&q=$keyword',
+      );
+
+      List<BookModel> books = [];
+
+      for (var item in data['items']) {
+        try {
+          books.add(BookModel.fromJson(item));
+        } catch (e) {
+          print(item);
+        }
       }
       return right(books);
     } on Exception catch (errMessage) {

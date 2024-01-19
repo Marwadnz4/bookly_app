@@ -1,5 +1,5 @@
 import 'package:bookly_app/core/utils/styles.dart';
-import 'package:bookly_app/features/home/presentation/views/widgets/best_seller_list_view.dart';
+import 'package:bookly_app/features/home/presentation/views/widgets/newest_books_list_view.dart';
 import 'package:bookly_app/features/home/presentation/views/widgets/custom_app_bar.dart';
 import 'package:bookly_app/features/home/presentation/views/widgets/featured_list_view.dart';
 import 'package:flutter/material.dart';
@@ -9,40 +9,44 @@ class HomeViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
+    return const CustomScrollView(
+      physics: BouncingScrollPhysics(),
       slivers: [
         SliverToBoxAdapter(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 30),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 30,
+                ),
                 child: CustomAppBar(),
               ),
+              FeaturedBooksListView(),
               SizedBox(
-                height: MediaQuery.of(context).size.height * .3,
-                child: const FeaturedBooksListView(),
-              ),
-              const SizedBox(
                 height: 50,
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 30),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 30,
+                ),
                 child: Text(
-                  'Best Seller',
+                  'Newest Books',
                   style: Styles.textStyle18,
                 ),
               ),
-              const SizedBox(
+              SizedBox(
                 height: 20,
               ),
             ],
           ),
         ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 30),
-          child: SliverFillRemaining(
-            child: BestSellerListView(),
+        SliverFillRemaining(
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: 30,
+            ),
+            child: NewestBooksListView(),
           ),
         ),
       ],

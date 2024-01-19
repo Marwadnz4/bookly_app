@@ -29,6 +29,9 @@ class _SplashViewBodyState extends State<SplashViewBody> with SingleTickerProvid
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Image.asset(Assets.logo),
+        const SizedBox(
+          height: 4,
+        ),
         SlidingText(
           slidingAnimation: slidingAnimation,
         ),
@@ -43,20 +46,18 @@ class _SplashViewBodyState extends State<SplashViewBody> with SingleTickerProvid
   }
 
   void navigateToHome() {
-    Future.delayed(const Duration(seconds: 2), () {
-      //   Get.to(
-      //     () => const HomeView(),
-      //     transition: Transition.fadeIn,
-      //     duration: kTransitionDuration,
-      //   );
-      GoRouter.of(context).push(AppRouter.kHomeView);
-    });
+    Future.delayed(
+      const Duration(seconds: 3),
+      () {
+        GoRouter.of(context).pushReplacement(AppRouter.kHomeView);
+      },
+    );
   }
 
   void initSlidingAnimation() {
     animationController = AnimationController(
       vsync: this,
-      duration: const Duration(minutes: 1),
+      duration: const Duration(seconds: 2),
     );
     slidingAnimation = Tween<Offset>(
       begin: const Offset(0, 20),
