@@ -1,11 +1,10 @@
-import 'package:bookly_app/core/utils/app_router.dart';
 import 'package:bookly_app/constants.dart';
+import 'package:bookly_app/core/utils/functions/goto_details_view.dart';
 import 'package:bookly_app/core/utils/styles.dart';
 import 'package:bookly_app/features/home/data/models/book_model/book_model.dart';
 import 'package:bookly_app/features/home/presentation/views/widgets/book_rating.dart';
 import 'package:bookly_app/features/home/presentation/views/widgets/custom_book_view_item.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class BookListViewItem extends StatelessWidget {
   const BookListViewItem({super.key, required this.book});
@@ -13,10 +12,7 @@ class BookListViewItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => GoRouter.of(context).push(
-        AppRouter.kBookDetailsBodyView,
-        extra: book,
-      ),
+      onTap: () => goToDetailsView(context, book),
       child: SizedBox(
         height: 125,
         child: Row(
@@ -48,6 +44,8 @@ class BookListViewItem extends StatelessWidget {
                   Text(
                     book.volumeInfo.authors!.first,
                     style: Styles.textStyle14,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(
                     height: 3,

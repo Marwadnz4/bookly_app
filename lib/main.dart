@@ -6,7 +6,9 @@ import 'package:bookly_app/features/home/presentation/view_model/featured_books_
 import 'package:bookly_app/features/home/presentation/view_model/newest_books_cubit/newest_books_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:connectivity_checker/connectivity_checker.dart';
 
 void main() {
   setupServiceLocator();
@@ -31,16 +33,26 @@ class BooklyApp extends StatelessWidget {
           )..fetchNewestBooks(),
         ),
       ],
-      child: MaterialApp.router(
-        routerConfig: AppRouter.router,
-        title: 'Bookly App',
-        showSemanticsDebugger: false,
-        theme: ThemeData.dark().copyWith(
-          scaffoldBackgroundColor: kPrimaryColor,
-          textTheme: GoogleFonts.montserratTextTheme(
-            ThemeData.dark().textTheme,
-          ),
-        ),
+      child: ScreenUtilInit(
+        designSize: const Size(360, 690),
+        minTextAdapt: true,
+        splitScreenMode: true,
+        // Use builder only if you need to use library outside ScreenUtilInit context
+        builder: (_, child) {
+          return ConnectivityAppWrapper(
+            app: MaterialApp.router(
+              routerConfig: AppRouter.router,
+              title: 'Bookly App',
+              showSemanticsDebugger: false,
+              theme: ThemeData.dark().copyWith(
+                scaffoldBackgroundColor: kPrimaryColor,
+                textTheme: GoogleFonts.montserratTextTheme(
+                  ThemeData.dark().textTheme,
+                ),
+              ),
+            ),
+          );
+        },
       ),
     );
   }
